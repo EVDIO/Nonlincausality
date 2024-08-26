@@ -246,9 +246,10 @@ def run_nonlincausality(
                 )
             # Training models for specified number of epochs and learning rate
             for i, e in enumerate(epochs_num):
-                opt = keras.optimizers.legacy.Adam(learning_rate=learning_rate[i])
+                opt_X = keras.optimizers.legacy.Adam(learning_rate=learning_rate[i])
+                opt_XY = keras.optimizers.legacy.Adam(learning_rate=learning_rate[i])
                 model_X.compile(
-                    optimizer=opt, loss="mean_squared_error", metrics=["mse"]
+                    optimizer=opt_X, loss="mean_squared_error", metrics=["mse"]
                 )
                 history_X.append(
                     model_X.fit(
@@ -257,7 +258,7 @@ def run_nonlincausality(
                 )
 
                 model_XY.compile(
-                    optimizer=opt, loss="mean_squared_error", metrics=["mse"]
+                    optimizer=opt_XY, loss="mean_squared_error", metrics=["mse"]
                 )
 
                 history_XY.append(
